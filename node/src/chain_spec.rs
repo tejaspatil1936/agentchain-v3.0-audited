@@ -153,7 +153,7 @@ pub fn development_config() -> Result<ChainSpec, String> {
     .build())
 }
 
-/// Local testnet config (3 validators: Alice, Bob, Charlie).
+/// Local testnet config (3 validators: Validator1, Validator2, Validator3).
 pub fn local_testnet_config() -> Result<ChainSpec, String> {
     Ok(ChainSpec::builder(
         WASM_BINARY.ok_or_else(|| "WASM binary not available".to_string())?,
@@ -165,18 +165,18 @@ pub fn local_testnet_config() -> Result<ChainSpec, String> {
     .with_properties(chain_properties())
     .with_genesis_config_patch(testnet_genesis(
         vec![
-            authority_keys_from_seed("Alice"),
-            authority_keys_from_seed("Bob"),
-            authority_keys_from_seed("Charlie"),
+            // TODO(deployment): Replace dev seeds with production SR25519 keys
+            authority_keys_from_seed("Validator1"),  // TODO(deployment): Replace with production key for 45.250.254.61
+            authority_keys_from_seed("Validator2"),  // TODO(deployment): Replace with production key for 45.250.254.119
+            authority_keys_from_seed("Validator3"),  // TODO(deployment): Replace with production key for 45.250.254.95
         ],
-        get_account_id_from_seed::<sr25519::Public>("Alice"),
+        // TODO(deployment): Replace with production sudo key
+        get_account_id_from_seed::<sr25519::Public>("Validator1"),  // Sudo = Validator1
         vec![
-            get_account_id_from_seed::<sr25519::Public>("Alice"),
-            get_account_id_from_seed::<sr25519::Public>("Bob"),
-            get_account_id_from_seed::<sr25519::Public>("Charlie"),
-            get_account_id_from_seed::<sr25519::Public>("Dave"),
-            get_account_id_from_seed::<sr25519::Public>("Eve"),
-            get_account_id_from_seed::<sr25519::Public>("Ferdie"),
+            // TODO(deployment): Replace dev seeds with production SR25519 keys
+            get_account_id_from_seed::<sr25519::Public>("Validator1"),  // TODO(deployment)
+            get_account_id_from_seed::<sr25519::Public>("Validator2"),  // TODO(deployment)
+            get_account_id_from_seed::<sr25519::Public>("Validator3"),  // TODO(deployment)
         ],
         true,
     ))

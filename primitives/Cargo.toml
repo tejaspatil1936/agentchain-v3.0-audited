@@ -1,0 +1,21 @@
+[package]
+name = "agentchain-primitives"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+sp-core    = { workspace = true }
+sp-runtime = { workspace = true }
+sp-api     = { workspace = true }
+codec      = { workspace = true }
+scale-info = { workspace = true }
+
+[features]
+default = ["std"]
+std = [
+    "sp-core/std",
+    "sp-runtime/std",
+    "sp-api/std",
+    "codec/std",
+    "scale-info/std",
+]

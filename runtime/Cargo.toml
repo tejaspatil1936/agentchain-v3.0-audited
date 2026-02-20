@@ -1,0 +1,141 @@
+[package]
+name = "agentchain-runtime"
+version.workspace = true
+edition.workspace = true
+
+[build-dependencies]
+substrate-wasm-builder = { workspace = true, optional = true }
+
+[dependencies]
+# Substrate FRAME
+frame-support          = { workspace = true }
+frame-system           = { workspace = true }
+frame-executive        = { workspace = true }
+frame-try-runtime      = { workspace = true, optional = true }
+frame-benchmarking     = { workspace = true, optional = true }
+
+# Standard Substrate pallets
+pallet-balances            = { workspace = true }
+pallet-timestamp           = { workspace = true }
+pallet-transaction-payment = { workspace = true }
+pallet-transaction-payment-rpc-runtime-api = { workspace = true }
+pallet-aura                = { workspace = true }
+pallet-grandpa             = { workspace = true }
+pallet-session             = { workspace = true }
+pallet-sudo                = { workspace = true }
+pallet-vesting             = { workspace = true }
+
+# Substrate primitives
+sp-api                 = { workspace = true }
+sp-core                = { workspace = true }
+sp-runtime             = { workspace = true }
+sp-io                  = { workspace = true }
+sp-std                 = { workspace = true }
+sp-version             = { workspace = true }
+sp-consensus-aura      = { workspace = true }
+sp-consensus-grandpa   = { workspace = true }
+sp-inherents           = { workspace = true }
+sp-block-builder       = { workspace = true }
+sp-genesis-builder     = { workspace = true }
+sp-offchain            = { workspace = true }
+sp-session             = { workspace = true }
+sp-transaction-pool    = { workspace = true }
+sp-storage             = { workspace = true }
+
+# Encoding
+codec    = { workspace = true }
+scale-info = { workspace = true, features = ["derive"] }
+log      = { workspace = true }
+
+# frame-system RPC runtime API
+frame-system-rpc-runtime-api = { workspace = true }
+
+# AgentChain crates
+agentchain-primitives   = { workspace = true }
+pallet-agent-identity   = { workspace = true }
+pallet-agent-market     = { workspace = true }
+pallet-agent-governance = { workspace = true }
+pallet-constitution     = { workspace = true }
+pallet-economics        = { workspace = true }
+
+[features]
+default = ["std"]
+std = [
+    "frame-support/std",
+    "frame-system/std",
+    "frame-executive/std",
+    "pallet-balances/std",
+    "pallet-timestamp/std",
+    "pallet-transaction-payment/std",
+    "pallet-transaction-payment-rpc-runtime-api/std",
+    "pallet-aura/std",
+    "pallet-grandpa/std",
+    "pallet-session/std",
+    "pallet-sudo/std",
+    "pallet-vesting/std",
+    "sp-api/std",
+    "sp-core/std",
+    "sp-runtime/std",
+    "sp-io/std",
+    "sp-std/std",
+    "sp-version/std",
+    "sp-consensus-aura/std",
+    "sp-consensus-grandpa/std",
+    "sp-inherents/std",
+    "sp-block-builder/std",
+    "sp-genesis-builder/std",
+    "sp-offchain/std",
+    "sp-session/std",
+    "sp-transaction-pool/std",
+    "sp-storage/std",
+    "codec/std",
+    "scale-info/std",
+    "log/std",
+    "frame-system-rpc-runtime-api/std",
+    "agentchain-primitives/std",
+    "pallet-agent-identity/std",
+    "pallet-agent-market/std",
+    "pallet-agent-governance/std",
+    "pallet-constitution/std",
+    "pallet-economics/std",
+    "substrate-wasm-builder",
+]
+runtime-benchmarks = [
+    "frame-support/runtime-benchmarks",
+    "frame-system/runtime-benchmarks",
+    "frame-benchmarking/runtime-benchmarks",
+    "pallet-balances/runtime-benchmarks",
+    "pallet-timestamp/runtime-benchmarks",
+    "pallet-grandpa/runtime-benchmarks",
+    "pallet-agent-identity/runtime-benchmarks",
+    "pallet-agent-market/runtime-benchmarks",
+    "pallet-agent-governance/runtime-benchmarks",
+    "pallet-constitution/runtime-benchmarks",
+    "pallet-economics/runtime-benchmarks",
+]
+try-runtime = [
+    "frame-try-runtime",
+    "frame-support/try-runtime",
+    "frame-system/try-runtime",
+    "pallet-balances/try-runtime",
+    "pallet-timestamp/try-runtime",
+    "pallet-aura/try-runtime",
+    "pallet-grandpa/try-runtime",
+    "pallet-session/try-runtime",
+    "pallet-sudo/try-runtime",
+    "pallet-vesting/try-runtime",
+    "pallet-agent-identity/try-runtime",
+    "pallet-agent-market/try-runtime",
+    "pallet-agent-governance/try-runtime",
+    "pallet-constitution/try-runtime",
+    "pallet-economics/try-runtime",
+]
+# V1.5 TEE Enforcement: Compile with `--features production` for testnet/mainnet.
+# This sets AllowSimulatedTee = false at compile time, ensuring all agents must
+# provide real TEE attestation (Intel SGX / AMD SEV-SNP). Without this feature,
+# the runtime allows `TeePlatform::Simulated` for local development/testing.
+#
+# Usage:
+#   cargo build --release --features production   # Testnet/Mainnet build
+#   cargo build --release                          # Dev build (simulated TEE allowed)
+production = []

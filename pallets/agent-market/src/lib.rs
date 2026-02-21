@@ -24,6 +24,8 @@ pub mod pallet {
     };
     use frame_system::pallet_prelude::*;
     use sp_runtime::traits::Hash;
+    use sp_runtime::Saturating;
+    use sp_runtime::traits::Bounded;
 
     type BalanceOf<T> =
         <<T as Config>::Currency as Currency<<T as frame_system::Config>::AccountId>>::Balance;

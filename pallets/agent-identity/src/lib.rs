@@ -76,6 +76,7 @@ pub mod pallet {
     };
     use frame_system::pallet_prelude::*;
     use sp_runtime::traits::Hash;
+    use sp_runtime::Saturating;
     use sp_core::sr25519;
 
     type BalanceOf<T> =

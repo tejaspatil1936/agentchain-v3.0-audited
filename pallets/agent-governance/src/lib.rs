@@ -38,6 +38,7 @@ pub mod pallet {
         traits::{Currency, ExistenceRequirement, ReservableCurrency},
     };
     use frame_system::pallet_prelude::*;
+    use sp_runtime::Saturating;
 
     type BalanceOf<T> =
         <<T as Config>::Currency as Currency<<T as frame_system::Config>::AccountId>>::Balance;
